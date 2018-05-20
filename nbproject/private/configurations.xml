@@ -65,9 +65,6 @@ Contributor(s):
       </nativedebugger>
       <runprofile version="9">
         <runcommandpicklist>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/B1203061.DAT"  "5000" "4000"</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "50" "4000"</runcommandpicklistitem>
-          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "4000"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "5000" "4000"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "4M"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "40000"</runcommandpicklistitem>
@@ -75,8 +72,11 @@ Contributor(s):
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "4m"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "40k"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400K"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400r"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400k"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400K"</runcommand>
+        <runcommand>"${OUTPUT_PATH}"  "/home/martin/Postleitdaten/test_out.dat" "/home/martin/Postleitdaten/PL1206154.DAT"  "0" "400k"</runcommand>
         <rundir></rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
@@ -109,6 +109,7 @@ Contributor(s):
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" "/home/martin/Postleitdaten/test_out" "/home/martin/Postleitdaten/B1203061.DAT" "1" </runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" "/home/martin/Postleitdaten/test_out" "/home/martin/Postleitdaten/B1203061.DAT" "1"</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" "/home/martin/Postleitdaten/test_out" "/home/martin/Postleitdaten/B1203061.DAT" "1"</runcommand>
         <rundir></rundir>

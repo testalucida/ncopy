@@ -32,20 +32,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-/**
- * 
- * @param argc
- * @param argv:
- *      1. argument: name of destination file
- *      2. argument: name of source file
- *      3. argument: number of bytes to copy. Entering a raw number will be 
- *                   taken as number of bytes. Entering a number followed
- *                   by a 'k' or a 'm' will be taken as kilobyte or 
- *                   megabyte. 
- * @return 0 on successful execution, a positive number elsewise.
- */
 
 const char* WRONG_ARGUMENTS = "Wrong number of arguments";
+const char* BYTES_TO_COPY_ERROR = "Number of bytes to copy invalid. \
+Must be given as raw number or number followed by 'k' or 'm'.";
 const char* USAGE = "usage: ncopy <pathnfile of dest file> \
 <pathnfile of src file> " \
 "<start copying with byte n>" \
@@ -54,12 +44,25 @@ const char* OPEN_SRC_ERROR = "could not open source file";
 const char* OPEN_DEST_ERROR = "could not create destination file";
 const char* POSITION_ERROR = "could not go to desired position";
 
+/**
+ * exits the application on error
+ * @param rc: exiting return code
+ * @param message: exiting reason
+ */
 void exit_on_failure( int rc, const char* message ) {
     fprintf( stderr, "%s\n", message );
     fprintf( stderr, "exiting program with rc = %d\n", rc );
     exit( rc );
 }
 
+/**
+ * Reads the given source file and writes the given destination file,
+ * starting at the given source file offset
+ * @param dest: path and name of destination file
+ * @param src: path and name of source file
+ * @param startpos: offset where reading begins
+ * @param n: number of bytes to read and copy
+ */
 void read_write( const char* dest, const char* src, int startpos, int n ) {
     FILE *in = fopen( src, "rb" );
     if( in == NULL ) exit_on_failure( 1, OPEN_SRC_ERROR );
@@ -80,21 +83,14 @@ void read_write( const char* dest, const char* src, int startpos, int n ) {
     fclose( out );
 }
 
-int main( int argc, char**argv ) {
-    if( argc != 5 ) {
-        fprintf( stderr, "%s\n", USAGE );
-        exit_on_failure( 1, WRONG_ARGUMENTS );
-    }
-    int i;
-    
-    // Prints arguments
-    printf("Arguments:\n");
-    for (i = 0; i < argc; i++) {
-        printf("%i: %s\n", i, argv[i]);
-    }
-    
-    //check if fifth argument is given as kilo or mega
-    const char* arg4 = argv[4];
+/**
+ * Tries to make a number out of arg4
+ * @param arg4: run argument, given as raw number or number followed
+ *              by 'k', 'K', 'm' or 'M'
+ * @return number of bytes
+ */
+long get_number_of_bytes( char* arg4 ) {
+    //check if arg4 is given as kilo or mega
     int multiplier[] = { 1024, 1024, 1048576, 1048576, 1 };
     const char check[] = {'k', 'K', 'm', 'M', 0x00 };
     
@@ -109,7 +105,45 @@ int main( int argc, char**argv ) {
         }
     }
     
-    int nbytes = ( atoi( arg4 ) * multiplier[k] );
+    //ensure no invalid character is given after the number
+    char* p = arg4; //arbitrary - must not be null
+    long n = strtol( arg4, &p, 0 );
+    if( *p != 0x00 ) {
+        return -1;
+    } 
+    
+    return ( n * multiplier[k] );
+}
+
+/**
+ * 
+ * @param argc: needs to be 5
+ * @param argv:
+ *      1. argument: name of destination file
+ *      2. argument: name of source file
+ *      3. argument: offset where reading is to start
+ *      4. argument: number of bytes to copy. Entering a raw number will be 
+ *                   taken as number of bytes. Entering a number followed
+ *                   by a 'k' or a 'm' will be taken as kilobyte or 
+ *                   megabyte. 
+ * @return 0 on successful execution, a positive number elsewise.
+ */
+int main( int argc, char**argv ) {
+    if( argc != 5 ) {
+        fprintf( stderr, "%s\n", USAGE );
+        exit_on_failure( 1, WRONG_ARGUMENTS );
+    }
+    int i;
+    
+    // Prints arguments
+    printf("Arguments:\n");
+    for (i = 0; i < argc; i++) {
+        printf("%i: %s\n", i, argv[i]);
+    }
+    
+    //get number of bytes to copy
+    int nbytes = get_number_of_bytes( argv[4] );
+    if( nbytes <= 0 ) exit_on_failure( 1, BYTES_TO_COPY_ERROR );
     
     read_write( argv[1], argv[2], atoi( argv[3] ), nbytes );
 
